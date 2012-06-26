@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:title="Preferences">
-	
-    
-    
-    <Preference android:key="OAuth"
-        android:summary="OAuth Launcher" />
-</PreferenceScreen>
