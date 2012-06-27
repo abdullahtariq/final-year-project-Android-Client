@@ -13,16 +13,21 @@ import org.json.JSONObject;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login_In  extends Activity{
 
@@ -31,6 +36,8 @@ public class Login_In  extends Activity{
 	EditText password;
 	private String imei;
 	private ProgressDialog progressbar;
+	private boolean auth;
+	SharedPreferences prefs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +49,10 @@ public class Login_In  extends Activity{
 		password = (EditText) findViewById(R.id.editText2);
 		TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		imei = tm.getDeviceId().toString();
-		Log.d("Drive Id : ", imei);
+	//	Log.d("Drive Id : ", imei);
+		prefs = getSharedPreferences("auth", 0);
+		auth = prefs.getBoolean("auth", false);
+		Toast.makeText(this, "" + auth, Toast.LENGTH_SHORT).show();
 	}
 	
 	public void onLoginClicked(View v)
@@ -52,7 +62,7 @@ public class Login_In  extends Activity{
 	
 	public void connection()
 	{
-		progressbar = ProgressDialog.show(Login_In.this, " " , "Sending...");
+		progressbar = ProgressDialog.show(Login_In.this, " " , "Processing...");
 		new Thread(){
 			public void run()
 			{
@@ -115,6 +125,9 @@ public class Login_In  extends Activity{
 			        	if(!updated.equals(""))
 			        	{
 			        		startActivity(new Intent(Login_In.this, Main.class));
+			        		Editor remover = getSharedPreferences("auth", 0).edit();
+			        		remover.remove("auth");
+			        		remover.commit();
 			        		Login_In.this.finish();
 			        	}
 			        
@@ -128,5 +141,24 @@ public class Login_In  extends Activity{
 			progressbar.dismiss();
 			}
 	}.start();
+	}
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+		{
+			try
+			{
+				Editor remover = getSharedPreferences("auth", 0).edit();
+        		remover.remove("auth");
+        		remover.commit();
+				Login_In.this.finish();
+				return super.onKeyDown(keyCode, event);
+			}
+			catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

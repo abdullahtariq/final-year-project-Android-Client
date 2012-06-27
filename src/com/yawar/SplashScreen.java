@@ -2,11 +2,14 @@ package com.yawar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 public class SplashScreen extends Activity {
 	
-	Settings object;
+	boolean auth = false;
 	
     /** Called when the activity is first created. */
     @Override
@@ -14,7 +17,7 @@ public class SplashScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overlayout);
         
-        object = new Settings();
+        ImageView iv = (ImageView) findViewById(R.id.imageView1);
         
         Thread splash = new Thread() {
         	@Override
@@ -32,7 +35,7 @@ public class SplashScreen extends Activity {
         		finally
         		{
         			finish();
-        			stop();
+        			
         		}
         	}
         };
@@ -40,7 +43,13 @@ public class SplashScreen extends Activity {
         
     }
     
-
+    public void imageClicked(View v)
+    {
+    	auth = true;
+    	Editor edit = getSharedPreferences("auth", 0).edit();
+    	edit.putBoolean("auth", auth);
+    	edit.commit();	
+    }
   
     
 }
