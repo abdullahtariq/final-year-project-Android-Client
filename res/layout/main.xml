@@ -2,38 +2,78 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#002758"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/Heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Click Me and Start Talking"
+        android:textSize="20sp"
+        android:typeface="monospace" />
+
     <Button
-        android:id="@+id/conn"
-        android:layout_width="wrap_content"
+        android:id="@+id/speak"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/Heading"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="162dp"
-        android:text="Button" android:onClick="connClicked"/>
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
-        android:ems="10" />
+        android:layout_marginTop="28dp"
+        android:onClick="speakClicked"
+        android:text="Speak" />
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
-        android:layout_centerVertical="true"
-        android:text="TextView" />
+        android:id="@+id/Heard"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/speak"
+        android:background="#ffffff"
+        android:isScrollContainer="true"
+        android:text="TextView"
+        android:textColor="#002986" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Heard"
+        android:layout_marginTop="6dp"
+        android:onClick="onSendClicked"
+        android:text="Send"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/modify"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/send_button">
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/done"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/modify"
+        android:onClick="doneClicked"
+        android:text="Done"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/done"
+        android:onClick="editClicked"
+        android:text="Edit"
+        android:textSize="20sp" />
 
 </RelativeLayout>

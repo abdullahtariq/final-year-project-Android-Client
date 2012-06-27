@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="questions">
+        <item >Whats your pet name?</item>
+        <item >Whats your school name?</item>
+        <item >The dish you like the most?</item>
+        <item >Favourite Game?</item>
+        <item >Define youeself in one Word?</item>
+    </string-array>
+    
+</resources>
